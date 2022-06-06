@@ -1,3 +1,5 @@
+import java.util.*;
+
 class Auto
 {
     public  String Kennzeichen = "J-AA 01";
@@ -143,15 +145,16 @@ public class AutoTest
 {
     public static void main(String[] args)
     {
-            //die Methoden funktionieren alle, es fehlt nur noch das Array in der main Methode
+            //die Ausgabe muss ich noch schöner machen, sonst stimmt aber alles
+            Auto[] array  = new Auto[3];
+            Auto auto1 = new Auto("SLF LS 372");
+            array[0]=auto1;
             PickUp pickup1 = new PickUp(50);
             pickup1.beladen(39);
-            System.out.println(pickup1.toString());
-            System.out.println("");
             pickup1.entladen(3);
-            System.out.println(pickup1.toString());
-            System.out.println("");
             pickup1.bereiteWaschenVor();
-            System.out.println(pickup1.toString());
+            array[1]=pickup1;
+            System.out.println(Arrays.toString(array));
+        
     }
 }
