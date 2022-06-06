@@ -36,7 +36,7 @@ class Auto
 
     public void fahre(int Kilometer)
     {
-        System.out.println(Kilometer +" gefahren!");
+        System.out.println(Kilometer +" km gefahren!");
         Kilometerstand = Kilometerstand + Kilometer;
     }
 
@@ -66,7 +66,7 @@ class Auto
 
     public String toString()
     {
-        return Kennzeichen + ": " + Kilometerstand + " Kilometer gefahren, " + Sitzplätze + " Sitzplätze, " + "Antenne " + Antenne;
+        return Kennzeichen + ":  " + Kilometerstand + "km  " + Sitzplätze + " Plätze  " + "Antenne " + Antenne;
     }
 }
 
@@ -109,7 +109,7 @@ class PickUp extends Auto
 
     public void entladen(int ladung)
     {
-        System.out.println("Ladung wurde um " + ladung + " verringert");
+        System.out.println("Ladung wurde um " + ladung + "kg verringert");
         if(ladungPickUp-ladung<0)
         {
             ladungPickUp = 0;
@@ -136,7 +136,7 @@ class PickUp extends Auto
 
     public String toString()
     {
-        return Kennzeichen + ": " + Kilometerstand + " Kilometer gefahren, " + Sitzplätze + " Sitzplätze, " + "Antenne " + Antenne + ", " + f +" Liter Fassungsvermögen" + ", " + ladungPickUp + " Liter Ladung";
+        return Kennzeichen + ":  " + Kilometerstand + "km  " + Sitzplätze + " Plätze  " + "Antenne " + Antenne +"  "+ ladungPickUp + "kg";
     }
 }
 
@@ -145,15 +145,31 @@ public class AutoTest
 {
     public static void main(String[] args)
     {
-            //die Ausgabe muss ich noch schöner machen, sonst stimmt aber alles
-            Auto[] array  = new Auto[3];
+            Auto[] array  = new Auto[4];
+
             Auto auto1 = new Auto("SLF LS 372");
-            array[0]=auto1;
+            auto1.fahre(30);
+
             PickUp pickup1 = new PickUp(50);
             pickup1.beladen(39);
             pickup1.entladen(3);
             pickup1.bereiteWaschenVor();
+
+            PickUp pickup2 = new PickUp("SON SL 888", 5);
+            pickup2.fahre(200);
+            pickup2.beladen(10);
+            pickup2.beladen(5);
+
+            Auto auto2 = new Auto();
+            auto2.fahre(399);
+            auto2.bereiteWaschenVor();
+            auto2.wasche();
+            auto2.fahreAntenneAus();
+
+            array[0]=auto1;
             array[1]=pickup1;
+            array[2]=pickup2;
+            array[3]=auto2;
             System.out.println(Arrays.toString(array));
         
     }
