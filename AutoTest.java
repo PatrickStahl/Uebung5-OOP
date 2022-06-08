@@ -8,11 +8,13 @@ class Auto
     public  String Antenne = "eingefahren"; 
     
 
+    //Konstruktor für Auto mit Standartkennzeichen
     public Auto()
     {
         
     }
 
+    //Konstruktor für Auto mit besonderem Kennzeichen
     public Auto(String Kennzeichen)
     {
         this.Kennzeichen = Kennzeichen;
@@ -73,7 +75,7 @@ class Auto
 class PickUp extends Auto
 {
     public int f;
-    public int ladungPickUp;
+    public int ladungPickUp = 0;
     public PickUp(int Fassungsvermoegen)
     {
         this.f=Fassungsvermoegen;
