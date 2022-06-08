@@ -5,7 +5,7 @@ class Auto
     public  String Kennzeichen = "J-AA 01";
     public  int Kilometerstand = 0;
     public  int Sitzplätze = 5;
-    public  String Antenne = "eingefahren"; //0 = eingefahren 1 = ausgefahren
+    public  String Antenne = "eingefahren"; 
     
 
     public Auto()
@@ -160,16 +160,18 @@ public class AutoTest
             pickup2.beladen(10);
             pickup2.beladen(5);
 
-            Auto auto2 = new Auto();
-            auto2.fahre(399);
-            auto2.bereiteWaschenVor();
-            auto2.wasche();
-            auto2.fahreAntenneAus();
-
+    
             array[0]=auto1;
             array[1]=pickup1;
             array[2]=pickup2;
-            array[3]=auto2;
+
+            //das hier hab ich einfach nur gemacht um zu sehen, dass man es auch direkt über das Array zuweisen kann
+            array[3] = new Auto();
+            array[3].fahre(20);
+            array[3].bereiteWaschenVor();
+            array[3].wasche();
+            array[3].fahreAntenneAus();
+
             System.out.println(Arrays.toString(array));
         
     }
