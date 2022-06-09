@@ -165,6 +165,9 @@ public class AutoTest
             array[2]=pickup2;
             array[3]=auto3;
 
+            
+
+
             System.out.println(Arrays.toString(array));
 
 
