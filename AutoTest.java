@@ -2,27 +2,32 @@ import java.util.*;
 
 class Auto
 {
-    public  String Kennzeichen = "J-AA 01";
-    public  int Kilometerstand = 0;
-    public  int Sitzplätze = 5;
-    public  String Antenne = "eingefahren"; 
+    protected  String Kennzeichen;
+    protected  int Kilometerstand;
+    protected  int Sitzplätze;
+    protected  String Antenne; 
     
 
     //Konstruktor für Auto mit Standartkennzeichen
     public Auto()
     {
-        
+        this.Kennzeichen = "J-AA 01";
+        this.Kilometerstand = 0;
+        this.Sitzplätze = 5;
+        this.Antenne = "eingefahren";
     }
 
     //Konstruktor für Auto mit besonderem Kennzeichen
     public Auto(String Kennzeichen)
     {
         this.Kennzeichen = Kennzeichen;
+        this.Kilometerstand=0;
+        this.Sitzplätze = 5;
+        this.Antenne = "eingefahren";
     }
 
     public String getKennzeichen()
     {
-        System.out.println(Kennzeichen);
         return Kennzeichen;
     }
 
@@ -39,7 +44,7 @@ class Auto
     public void fahre(int Kilometer)
     {
         System.out.println(Kilometer +" km gefahren!");
-        Kilometerstand = Kilometerstand + Kilometer;
+        this.Kilometerstand = Kilometerstand + Kilometer;
     }
 
     public void fahreAntenneAus()
@@ -57,12 +62,12 @@ class Auto
     public void bereiteWaschenVor()
     {
         System.out.println("Waschen wird vorbereitet...");
-        System.out.println("Antenne zum Waschen eingefahren!");
-        Antenne = "eingefahren";
+        fahreAntenneEin();
     }
 
     public void wasche()
     {
+        bereiteWaschenVor();
         System.out.println("Auto wird gewaschen!");
     }
 
@@ -74,18 +79,21 @@ class Auto
 
 class PickUp extends Auto
 {
-    public int f;
-    public int ladungPickUp = 0;
+    private int f;
+    private int ladungPickUp;
     public PickUp(int Fassungsvermoegen)
     {
+        super();
         this.f=Fassungsvermoegen;
-        this.Sitzplätze=2;
+        this.ladungPickUp = 0;
+        this.Sitzplätze = 2;
     }
 
     public PickUp(String Kennzeichen, int Fassungsvermoegen)
     {
+        super(Kennzeichen);
         this.f=Fassungsvermoegen;
-        this.Kennzeichen = Kennzeichen;
+        this.ladungPickUp = 0;
         this.Sitzplätze = 2;
     }
 
@@ -96,10 +104,10 @@ class PickUp extends Auto
 
     public boolean beladen(int ladung)
     {
-        if(f>=ladung)
+        if(f >= ladungPickUp + ladung)
         {
-            System.out.println("Pick-Up wurde erfolgreich beladen!");
-            this.ladungPickUp = ladung;
+            System.out.println("Pick-Up wurde erfolgreich mit " + ladung +"kg beladen!");
+            this.ladungPickUp = ladung + ladungPickUp;
             return true;
         }
         else
@@ -130,15 +138,13 @@ class PickUp extends Auto
     public void bereiteWaschenVor()
     {
         System.out.println("Waschen wird vorbereitet...");
-        System.out.println("Antenne zum Waschen eingefahren!");
-        System.out.println("PickUp zum Waschen entladen!");
-        Antenne = "eingefahren";
+        fahreAntenneEin();
         entladen();
     }
 
     public String toString()
     {
-        return Kennzeichen + ":  " + Kilometerstand + "km  " + Sitzplätze + " Plätze  " + "Antenne " + Antenne +"  "+ ladungPickUp + "kg";
+        return Kennzeichen + ":  " + Kilometerstand + "km  " + Sitzplätze + " Plätze  " + "Antenne " + Antenne +"  "+ f + "kg Fassungsvermoegen  " +  ladungPickUp + "kg Ladung";
     }
 }
 
@@ -147,33 +153,35 @@ public class AutoTest
 {
     public static void main(String[] args)
     {
-            Auto[] array  = new Auto[4];
+            Auto[] array = new Auto[4];
 
             Auto auto1 = new Auto("SLF LS 372");
-            auto1.fahre(30);
-
             PickUp pickup1 = new PickUp(50);
-            pickup1.beladen(39);
-            pickup1.entladen(3);
-            pickup1.bereiteWaschenVor();
-
             PickUp pickup2 = new PickUp("SON SL 888", 5);
-            pickup2.fahre(200);
-            pickup2.beladen(10);
-            pickup2.beladen(5);
+            Auto auto3 = new Auto();
 
-    
             array[0]=auto1;
             array[1]=pickup1;
             array[2]=pickup2;
+            array[3]=auto3;
 
-            //das hier hab ich einfach nur gemacht um zu sehen, dass man es auch direkt über das Array zuweisen kann
-            array[3] = new Auto();
-            array[3].fahre(20);
-            array[3].bereiteWaschenVor();
-            array[3].wasche();
-            array[3].fahreAntenneAus();
+            System.out.println(Arrays.toString(array));
 
+
+            auto1.fahre(30);
+
+            pickup1.beladen(39);
+            pickup1.entladen(3);
+            pickup1.bereiteWaschenVor();
+            
+            pickup2.fahre(200);
+            pickup2.beladen(10);
+            pickup2.beladen(5);
+            
+            auto3.fahre(30);
+            auto3.wasche();
+            auto3.fahreAntenneAus();
+            
             System.out.println(Arrays.toString(array));
         
     }
