@@ -153,7 +153,7 @@ public class AutoTest
 {
     public static void main(String[] args)
     {
-            Auto[] array = new Auto[4];
+            Auto[] array = new Auto[5];
 
             Auto auto1 = new Auto("SLF LS 372");
             PickUp pickup1 = new PickUp(50);
@@ -165,7 +165,11 @@ public class AutoTest
             array[2]=pickup2;
             array[3]=auto3;
 
-            
+            array[4] = new PickUp(69);
+            PickUp pickup = (PickUp)array[4];
+            pickup.beladen(69);
+            array[4].fahre(20);
+            //((PickUp)array[4]).beladen(5);
 
 
             System.out.println(Arrays.toString(array));
